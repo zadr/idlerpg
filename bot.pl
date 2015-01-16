@@ -1,6 +1,6 @@
 #!/usr/local/bin/perl
 # irpg bot v3.1.2 by jotun, jotun@idlerpg.net, et al. See http://idlerpg.net/
-# 3.2 by zadr, et al. in irc.foonetic.net/idlerpg-discuss
+# 3.1.3 by zader, et al. in irc.foonetic.net/idlerpg-discuss
 #
 # Some code within this file was written by authors other than myself. As such,
 # distributing this code or distributing modified versions of this code is
@@ -37,7 +37,7 @@ my %opts;
 
 readconfig();
 
-my $version = "3.2";
+my $version = "3.1.3";
 
 # command line overrides .irpg.conf
 GetOptions(\%opts,
@@ -372,7 +372,8 @@ sub parse {
     }
     elsif ($arg[1] eq '001') {
         # send our identify command, set our usermode, join channel
-		  $opts{botident} =~ s/%botpass%/$ENV{'BOTPASS'}/
+		  $opts{botident} =~ s/%botpass%/$ENV{'BOTPASS'}/;
+        sts($opts{botident});
         sts("MODE $opts{botnick} :$opts{botmodes}");
         sts("JOIN $opts{botchan}");
         $opts{botchan} =~ s/ .*//; # strip channel key if present
@@ -1197,7 +1198,7 @@ sub rpcheck { # check levels, update database
     if ($rpreport%1800==0) { # 30 mins
         if ($opts{botnick} ne $primnick) {
 			  if ($opts{botghostcmd}) {
-				  $opts{botghostcmd} =~ s/%botpass%/$ENV{'BOTPASS'}/			  	
+				  $opts{botghostcmd} =~ s/%botpass%/$ENV{'BOTPASS'}/;
               sts($opts{botghostcmd});
               sts("NICK $primnick");
 			  }
@@ -1944,12 +1945,9 @@ sub questpencheck {
                          "pressure towards hell. Therefore have you drawn ".
                          "yourselves 15 steps closer to that gaping maw."));
             for $player (grep { $rps{$_}{online} } keys %rps) {
-                if ($rps{$player}{name} eq $k {
-                    my $gain = int(30 * ($opts{rppenstep}**$rps{$player}{level}));
-                    $rps{$player}{pen_quest} += $gain;
-                    $rps{$player}{next} += $gain;
-                    break;
-                }
+                my $gain = int(15 * ($opts{rppenstep}**$rps{$player}{level}));
+                $rps{$player}{pen_quest} += $gain;
+                $rps{$player}{next} += $gain;
             }
             undef(@{$quest{questers}});
             $quest{qtime} = time() + 43200; # 12 hours
