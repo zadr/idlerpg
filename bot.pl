@@ -1,6 +1,6 @@
 #!/usr/local/bin/perl
 # irpg bot v3.1.2 by jotun, jotun@idlerpg.net, et al. See http://idlerpg.net/
-# 3.2 by zader, et al. in irc.foonetic.net/idlerpg-discuss
+# 3.2 by zadr, et al. in irc.foonetic.net/idlerpg-discuss
 #
 # Some code within this file was written by authors other than myself. As such,
 # distributing this code or distributing modified versions of this code is
@@ -372,7 +372,7 @@ sub parse {
     }
     elsif ($arg[1] eq '001') {
         # send our identify command, set our usermode, join channel
-        sts($opts{botident});
+		  $opts{botident} =~ s/%botpass%/$ENV{'BOTPASS'}/
         sts("MODE $opts{botnick} :$opts{botmodes}");
         sts("JOIN $opts{botchan}");
         $opts{botchan} =~ s/ .*//; # strip channel key if present
@@ -1196,8 +1196,11 @@ sub rpcheck { # check levels, update database
     }
     if ($rpreport%1800==0) { # 30 mins
         if ($opts{botnick} ne $primnick) {
-            sts($opts{botghostcmd}) if $opts{botghostcmd};
-            sts("NICK $primnick");
+			  if ($opts{botghostcmd}) {
+				  $opts{botghostcmd} =~ s/%botpass%/$ENV{'BOTPASS'}/			  	
+              sts($opts{botghostcmd});
+              sts("NICK $primnick");
+			  }
         }
     }
     if ($rpreport%600==0 && $pausemode) { # warn every 10m
