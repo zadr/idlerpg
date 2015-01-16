@@ -1940,9 +1940,12 @@ sub questpencheck {
                          "pressure towards hell. Therefore have you drawn ".
                          "yourselves 15 steps closer to that gaping maw."));
             for $player (grep { $rps{$_}{online} } keys %rps) {
-                my $gain = int(15 * ($opts{rppenstep}**$rps{$player}{level}));
-                $rps{$player}{pen_quest} += $gain;
-                $rps{$player}{next} += $gain;
+                if ($rps{$player}{name} eq $k {
+                    my $gain = int(30 * ($opts{rppenstep}**$rps{$player}{level}));
+                    $rps{$player}{pen_quest} += $gain;
+                    $rps{$player}{next} += $gain;
+                    break;
+                }
             }
             undef(@{$quest{questers}});
             $quest{qtime} = time() + 43200; # 12 hours
