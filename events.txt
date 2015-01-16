@@ -31,6 +31,8 @@ C misplaced their map
 C broke their compass
 C lost their glasses
 C walked face-first into a tree
+C fed the gremlins
+C learned Perl
 G found a pair of Nikes
 G caught a unicorn
 G found a $20 note in their winter coat
@@ -44,7 +46,7 @@ G discovered caffeinated coffee
 G grew an extra leg
 G was visited by a very pretty nymph
 G found kitten
-G learned Perl
+G learned Ruby
 G found an exploit in the IRPG code
 G tamed a wild horse
 G found a one-time-use spell of quickness
