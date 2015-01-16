@@ -371,12 +371,6 @@ sub parse {
         penalize($username,"notice",length("@arg[3..$#arg]")-1);
     }
     elsif ($arg[1] eq '001') {
-        # send our identify command, set our usermode, join channel
-		  $opts{botident} =~ s/%botpass%/$ENV{'BOTPASS'}/;
-        sts($opts{botident});
-        sts("MODE $opts{botnick} :$opts{botmodes}");
-        sts("JOIN $opts{botchan}");
-        $opts{botchan} =~ s/ .*//; # strip channel key if present
     }
     elsif ($arg[1] eq '315') {
         # 315 is /WHO end. report who we automagically signed online iff it will
@@ -420,6 +414,14 @@ sub parse {
             $rps{$prev_online{$arg[7]."!".$arg[4]."\@".$arg[5]}}{online} = 1;
             $auto_login{$prev_online{$arg[7]."!".$arg[4]."\@".$arg[5]}}=1;
         }
+    }
+    elsif ($arg[1] eq '376') {
+    	# send our identify command, set our usermode, join channel
+	$opts{botident} =~ s/%botpass%/$ENV{'BOTPASS'}/;
+        sts($opts{botident});
+        sts("MODE $opts{botnick} :$opts{botmodes}");
+        sts("JOIN $opts{botchan}");
+        $opts{botchan} =~ s/ .*//; # strip channel key if present
     }
     elsif ($arg[1] eq 'privmsg') {
         $arg[0] = substr($arg[0],1); # strip leading : from privmsgs
