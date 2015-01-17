@@ -81,7 +81,6 @@ GetOptions(\%opts,
     "owneraddonly",
     "ownerdelonly",
     "ownerpevalonly",
-    "checkupdates",
     "senduserlist",
     "limitpen=i",
     "mapx=i",
@@ -179,40 +178,6 @@ if (! -e $opts{dbfile}) {
     }
     writedb();
     print "OK, wrote you into $opts{dbfile}.\n";
-}
-
-# this is almost silly...
-if ($opts{checkupdates}) {
-    print "Checking for updates...\n\n";
-    my $tempsock = IO::Socket::INET->new(PeerAddr=>"jotun.ultrazone.org:80",
-                                         Timeout => 15);
-    if ($tempsock) {
-        print $tempsock "GET /g7/version.php?version=$version HTTP/1.1\r\n".
-                        "Host: jotun.ultrazone.org:80\r\n\r\n";
-        my($line,$newversion);
-        while ($line=<$tempsock>) {
-            chomp($line);
-            next() unless $line;
-            if ($line =~ /^Current version : (\S+)/) {
-                if ($version ne $1) {
-                    print "There is an update available! Changes include:\n";
-                    $newversion=1;
-                }
-                else {
-                    print "You are running the latest version (v$1).\n";
-                    close($tempsock);
-                    last();
-                }
-            }
-            elsif ($newversion && $line =~ /^(  -? .+)/) { print "$1\n"; }
-            elsif ($newversion && $line =~ /^URL: (.+)/) {
-                print "\nGet the newest version from $1!\n";
-                close($tempsock);
-                last();
-            }
-        }
-    }
-    else { print debug("Could not connect to update server.")."\n"; }
 }
 
 print "\n".debug("Becoming a daemon...")."\n";
@@ -370,8 +335,6 @@ sub parse {
     elsif ($arg[1] eq 'notice' && $arg[2] ne $opts{botnick}) {
         penalize($username,"notice",length("@arg[3..$#arg]")-1);
     }
-    elsif ($arg[1] eq '001') {
-    }
     elsif ($arg[1] eq '315') {
         # 315 is /WHO end. report who we automagically signed online iff it will
         # print < 1k of text
@@ -507,7 +470,7 @@ sub parse {
                                 "long.",$usernick);
                     }
                     elsif (time() == $lastreg) {
-                        privmsg("Wait 1 second and try again.",$usernick);                
+                        privmsg("Wait 1 second and try again.",$usernick);
                     }
                     else {
                         if ($opts{voiceonlogin}) {
@@ -727,7 +690,7 @@ sub parse {
                              "$arg[4] reaches next level in ".
                              duration($rps{$arg[4]}{next}).".");
                 }
-            }   
+            }
             elsif ($arg[3] eq "logout") {
                 if (defined($username)) {
                     penalize($username,"logout");
@@ -808,7 +771,7 @@ sub parse {
                 if (!defined($username)) {
                     privmsg("You are not logged in.", $usernick)
                 }
-                elsif (!defined($arg[4]) || (lc($arg[4]) ne "good" && 
+                elsif (!defined($arg[4]) || (lc($arg[4]) ne "good" &&
                        lc($arg[4]) ne "neutral" && lc($arg[4]) ne "evil")) {
                     privmsg("Try: ALIGN <good|neutral|evil>", $usernick);
                 }
@@ -1154,7 +1117,7 @@ sub rpcheck { # check levels, update database
     if (rand((12*86400)/$opts{self_clock}) < $onlinegood) { goodness(); }
 
     moveplayers();
-    
+
     # statements using $rpreport do not bother with scaling by the clock because
     # $rpreport is adjusted by the number of seconds since last rpcheck()
     if ($rpreport%120==0 && $opts{writequestfile}) { writequestfile(); }
@@ -1242,7 +1205,7 @@ sub rpcheck { # check levels, update database
             # attempt to make sure this is an actual user, and not just an
             # artifact of a bad PEVAL
         }
-        if (!$pausemode && $rpreport%60==0) { writedb(); }
+        if (!$pausemode) { writedb(); }
         $rpreport += $opts{self_clock};
         $lasttime = $curtime;
     }
@@ -1570,7 +1533,7 @@ sub moveplayers {
                     if ($rps{$player}{y} > $opts{mapy}) { $rps{$player}{y}=0; }
                     if ($rps{$player}{x} < 0) { $rps{$player}{x}=$opts{mapx}; }
                     if ($rps{$player}{y} < 0) { $rps{$player}{y}=$opts{mapy}; }
-                    
+
                     if (exists($positions{$rps{$player}{x}}{$rps{$player}{y}}) &&
                         !$positions{$rps{$player}{x}}{$rps{$player}{y}}{battled}) {
                         if ($rps{$positions{$rps{$player}{x}}{$rps{$player}{y}}{user}}{isadmin} &&
@@ -1922,7 +1885,7 @@ sub quest {
         chanmsg(join(", ",(@{$quest{questers}})[0..2]).", and ".
                 "$quest{questers}->[3] have been chosen by the gods to ".
                 "$quest{text}. Quest to end in ".duration($quest{qtime}-time()).
-                ".");    
+                ".");
     }
     elsif ($quest{type} == 2) {
         chanmsg(join(", ",(@{$quest{questers}})[0..2]).", and ".
