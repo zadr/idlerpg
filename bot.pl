@@ -1305,6 +1305,14 @@ sub challenge_opp { # pit argument player against random player
         $rps{$u}{next} += $gain;
         chanmsg("$u reaches next level in ".duration($rps{$u}{next}).".");
     }
+    my $idfactor = $rps{$u}{alignment} eq "g" ? 50 :
+                   $rps{$u}{alignment} eq "e" ? 100 :
+                   67;
+    if (rand($idfactor) < 1) {
+	chanmsg("While recovering from battle, $u notices a glint in the mud.".
+                "Upon investigation, they find an old lost item!");
+        find_item($u);
+    }
 }
 
 sub team_battle { # pit three players against three other players
