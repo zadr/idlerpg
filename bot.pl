@@ -1853,7 +1853,7 @@ sub godsend { # bless the unworthy
 }
 
 sub quest {
-    @{$quest{questers}} = grep { $rps{$_}{online} && $rps{$_}{level} > 39 &&
+    @{$quest{questers}} = grep { $rps{$_}{online} && $rps{$_}{level} > 24 &&
                                  time()-$rps{$_}{lastlogin}>36000 } keys(%rps);
     if (@{$quest{questers}} < 4) { return undef(@{$quest{questers}}); }
     while (@{$quest{questers}} > 4) {
