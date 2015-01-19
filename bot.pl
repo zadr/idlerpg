@@ -1948,17 +1948,15 @@ sub questpencheck {
     my ($quester,$player);
     for $quester (@{$quest{questers}}) {
         if ($quester eq $k) {
-            chanmsg(clog("$k\'s prudence and self-regard has brought the ".
-                         "wrath of the gods upon the realm. All your great ".
-                         "wickedness makes you as it were heavy with lead, ".
-                         "and to tend downwards with great weight and ".
-                         "pressure towards hell. Therefore have you drawn ".
-                         "yourselves 15 steps closer to that gaping maw."));
-            for $player (grep { $rps{$_}{online} } keys %rps) {
-                my $gain = int(15 * ($opts{rppenstep}**$rps{$player}{level}));
-                $rps{$player}{pen_quest} += $gain;
-                $rps{$player}{next} += $gain;
-            }
+            chanmsg(clog("$k\'s cowardice has brought the wrath of the gods ".
+                         "down upon them.  All their great wickedness makes ".
+                         "them heavy with lead, and to tend downwards with ".
+                         "great weight and pressure towards hell. Therefore ".
+                         "have they drawn themself 30 steps closer to that ".
+                         "gaping maw."));
+            my $gain = int(30 * ($opts{rppenstep}**$rps{$k}{level}));
+            $rps{$k}{pen_quest} += $gain;
+            $rps{$k}{next} += $gain;
             undef(@{$quest{questers}});
             $quest{qtime} = time() + 43200; # 12 hours
         }
