@@ -9,9 +9,9 @@ C lost their mind
 C died, temporarily..
 C was caught in a terrible snowstorm
 C EXPLODED, somewhat..
-C got knifed in a dark alley
+C was knifed in a dark alley
 C saw an episode of Ally McBeal
-C got turned INSIDE OUT, practically
+C was turned INSIDE OUT, practically
 C ate a very disagreeable fruit, getting a terrible case of heartburn
 C met up with a mob hitman for not paying their bills
 C has fallen ill with the black plague
@@ -25,8 +25,7 @@ C was bucked from a horse
 C was bitten by a møøse
 C was sat on by a giant
 C ate a plate of discounted, day-old sushi
-C got harassed by peer
-C got lost in the woods
+C was lost in the woods
 C misplaced their map
 C broke their compass
 C lost their glasses
@@ -36,14 +35,12 @@ C learned Perl
 C was picked by Cthulhu to be used in furthering his goals
 C was hacked by Anonymous
 C ate the yellow snow
-C got an unwanted shoulder-rub from a PM
-C got caught stealing wifi from the neighbors
+C was caught stealing wifi from the neighbors
 C used the wrong coversheet on their TPS reports
-C got ambushed by a liplicker
-C got right-sized
+C was ambushed by a liplicker
+C was right-sized
 C was late submitting their timesheet
-C got pulled into an ambush meeting
-C sharted
+C was pulled into an ambush meeting
 C wore skinny jeans to work
 C has found that their true calling is playing the oboe
 G found a get-out-of-jail-free card
@@ -54,8 +51,8 @@ G caught a unicorn
 G found a $20 note in their winter coat
 G discovered loose change in the couch
 G bought a winning lottery ticket
-G got a promotion at work
-G got a suprise birthday party
+G received a promotion at work
+G was the target of a suprise party
 G discovered a secret, underground passage
 G was taught to run quickly by a secret tribe of pygmies that know how to, among other things, run quickly
 G discovered caffeinated coffee
@@ -72,7 +69,7 @@ G bribed the local IRPG administrator
 G stopped using dial-up
 G invented the wheel
 G gained a sixth sense
-G got a kiss from drwiii
+G was kissed by drwiii
 G had their clothes laundered by a passing fairy
 G was rejuvenated by drinking from a magic stream
 G was bitten by a radioactive spider
@@ -80,14 +77,10 @@ G was accepted into Pi Beta Phi
 G was touched by the Flying Spaghetti Monster's noodly appendage
 G puppetized their server environment
 G made their coffee with caffeinated water
-G found nude photos of their ex-SO, from back when they were hot
 G learned Perl
-G farted a rainbow
 G found a coupon for a free ice cream cone from Lactose Trollop
-G got sparklied by a passing fairy
-G picked up a drunk sorority chicked named Jennyfyr
-G got a peck on the cheek from Sofia Vergara
-G ordered from Amazon, and Amazon forgot to charge them salestax
+G was sparklied by a passing fairy
+G ordered from Amazon, and wasn't charged sales tax
 G started stealing wifi from the neighbors
 Q1 locate the ancient writings of Ahmo, prophet of the blind god Io, namely their last and hidden work, Time as Deity, thought to answer all of mankind's greater wonders
 Q1 locate the centuries-lost tomes of the grim prophet Haplashak Mhadhu
